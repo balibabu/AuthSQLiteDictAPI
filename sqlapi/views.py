@@ -104,9 +104,16 @@ def create_table(user, table_name):
     Permission.objects.create(user=user, operation=all_operations, table=new_table)
 
 def get_user_tables(user):
-    user_permissions = Permission.objects.filter(user=user).select_related('table')
-    table_names = [permission.table.table_name for permission in user_permissions]
-    return table_names
+    # Retrieve the tables for which the user has permissions
+    user_permissions = Permission.objects.filter(user=user).select_related('table', 'operation')
+
+    # Create a list of dictionaries with "table_name" and "permit" keys
+    table_permissions = [
+        {"table_name": permission.table.table_name, "permit": permission.operation.opTitle}
+        for permission in user_permissions
+    ]
+
+    return table_permissions
 
 def doesHavePermissionOfAction(user, table_name, action):
     try:
