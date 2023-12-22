@@ -9,7 +9,7 @@ def create_default_operations(sender, **kwargs):
             {"opTitle": "__all__"},
             {"opTitle": "read"},
             {"opTitle": "insert"},
-            {"opTitle": "update"},
+            {"opTitle": "override"},
             {"opTitle": "delete"},
         ]
 

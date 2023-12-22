@@ -1,13 +1,12 @@
 # AuthSQLiteDictAPI
 
-
 ## Description
 
-A Django project that utilizes the sqlitedict library, incorporates user authorization, and offers API endpoints for performing operations on a SQLite-backed dictionary.
+A Django project that utilizes the `sqlitedict` library, incorporates user authorization, and offers API endpoints for performing operations on a SQLite-backed dictionary.
 
 ## Features
 
-- **SQLite-backed Dictionary:** Utilizes the sqlitedict library to manage data persistence.
+- **SQLite-backed Dictionary:** Utilizes the `sqlitedict` library to manage data persistence.
 - **User Authentication:** Implements user authentication for secure access to the API.
 - **API Endpoints:** Provides endpoints for performing various operations on the SQLite-backed dictionary.
 
@@ -70,23 +69,68 @@ A Django project that utilizes the sqlitedict library, incorporates user authori
 
 2. Use the provided API endpoints for dictionary operations:
 
-   - Endpoint 1
-   - Endpoint 2
-   - ...
+   - **Login:**
+     - Description: If already a user then login and get a token for future HTTP requests
+     - Method: POST
+     - Path: http://localhost:8000/user/login/
 
-## API Documentation
+   - **Register:**
+     - Description: Register as a new user
+     - Method: POST
+     - Path: http://localhost:8000/user/register/
 
-- **Endpoint 1:**
-  - Description: 
-  - Method: 
-  - Path: 
+   - **Logout:**
+     - Description: Logout and invalidate the authentication token
+     - Method: POST
+     - Path: http://localhost:8000/user/logout/
 
-- **Endpoint 2:**
-  - Description: 
-  - Method: 
-  - Path: 
+   - **Simple SQLite:**
+     - Description: Perform simple operations on the SQLite-backed dictionary
+     - Method: POST
+     - Path: http://localhost:8000/sql/
 
-...
+   - **SQLiteDict:**
+     - Description: Access and modify the SQLite-backed dictionary
+     - Method: POST
+     - Path: http://localhost:8000/sql/dict/
+
+   - **Permission Control:**
+     - Description: Manage user permissions for dictionary operations
+     - Method: POST
+     - Path: http://localhost:8000/sql/permit/
+Your custom JSON format explanations look good for the most part, but I suggest making a few improvements for clarity and consistency:
+
+## Custom Format For Endpoints SQLiteDict and Permission Control
+
+*These are full format with all fields; for any operation, provide only the required fields.*
+
+### SQLiteDict:
+
+```json
+{
+  "prefix": "prefix can be null",
+  "action": "override, get_table_names, get_keys, get_content_as_dict, deleteTable, read, has, delete",
+  "data": {
+    "key": "key",
+    "value": "value",
+    "table": "tablename"
+  }
+}
+```
+
+### Permission Control:
+
+```json
+{
+  "prefix": "prefix can be null",
+  "permission": "grant or revoke or check",
+  "data": {
+    "table": "tablename",
+    "username or userid": "username or userid",
+    "action": "insert, read, override, delete, __all__"
+  }
+}
+```
 
 ## Contributing
 
