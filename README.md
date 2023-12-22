@@ -109,7 +109,7 @@ Your custom JSON format explanations look good for the most part, but I suggest 
 ```json
 {
   "prefix": "prefix can be null",
-  "action": "override, get_table_names, get_keys, get_content_as_dict, deleteTable, read, has, delete",
+  "action": "override, get_table_names, get_keys, get_content_as_dict, deleteTable, read, has or delete",
   "data": {
     "key": "key",
     "value": "value",
@@ -123,11 +123,11 @@ Your custom JSON format explanations look good for the most part, but I suggest 
 ```json
 {
   "prefix": "prefix can be null",
-  "permission": "grant or revoke or check",
+  "permission": "grant, revoke or check",
   "data": {
     "table": "tablename",
     "username or userid": "username or userid",
-    "action": "insert, read, override, delete, __all__"
+    "action": "insert, read, override, delete or __all__"
   }
 }
 ```
