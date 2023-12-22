@@ -7,7 +7,6 @@ from rest_framework.authtoken.models import Token
 from django.contrib.auth import logout
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import TokenAuthentication
-from django.views.decorators.csrf import csrf_exempt
 
 @api_view(['GET'])
 @authentication_classes([TokenAuthentication])
@@ -17,7 +16,6 @@ def get_user_info(request):
     return Response({'username':user.username})
 
 @api_view(['POST'])
-@csrf_exempt
 def register_api_view(request):
     username = request.data.get('username')
     password = request.data.get('password')
@@ -28,7 +26,6 @@ def register_api_view(request):
     return Response({'status': 'success', 'message': 'User registered successfully'}, status=status.HTTP_201_CREATED)
 
 @api_view(['POST'])
-@csrf_exempt
 def login_api_view(request):
     username = request.data.get('username')
     password = request.data.get('password')
